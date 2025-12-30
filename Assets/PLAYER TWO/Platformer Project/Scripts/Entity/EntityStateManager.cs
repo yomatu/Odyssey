@@ -40,13 +40,21 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     public EntityState<T> current { get; protected set; }
 
     /// <summary>
+    /// 该状态管理器关联的实体实例
+    /// </summary>
+    public T entity { get; protected set; }
+    
+    /// <summary>
     /// unity 生命周期start ,负重初始化实体和状态
     /// </summary>
     protected void Start()
     {
+        InitializeEntity();
         InitializeStates();
     }
 
+    protected virtual void InitializeEntity() => entity = GetComponent<T>();
+    
     /// <summary>
     /// 抽象方法,必须由子类实现,用于返回所有状态实例的列表.
     /// </summary>
@@ -80,6 +88,21 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
         }
         
     }
-    
+
+
+    /// <summary>
+    /// 每帧调用,用于更新当前的状态逻辑.
+    /// </summary>
+    public virtual void Step()
+    {
+        //确保当前状态存在且游戏未暂停
+        if (current !=null && Time.timeScale>0)
+        {
+            current.Step(entity);
+            
+        }
+        
+        
+    }
     
 }

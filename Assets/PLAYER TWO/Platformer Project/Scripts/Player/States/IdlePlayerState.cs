@@ -32,7 +32,8 @@ public class IdlePlayerState : PlayerState
     /// <param name="player"></param>
     protected override void OnStep(Player player)
     {
-        Debug.Log("IdlePlayerState::OnStep");
+        //这里打印了玩家是否正确的进入了该状态
+        // Debug.Log("IdlePlayerState::OnStep");
      
         //根据输入要知道往哪边走
        // xxx.GetMovementDirection
@@ -41,7 +42,17 @@ public class IdlePlayerState : PlayerState
        var inputDirection = player.inputs.GetMovementDirection();
 
        //walk,输入操作--配置数据--速度,方向----改变状态
-       Debug.Log("inputDirection = " + inputDirection);
+       //这里监听了玩家的输入操作并打印在log里面
+     //  Debug.Log("inputDirection = " + inputDirection);
+     
+     //如果有移动输入或水平速度>0 ->切换到 walk 状态
+        //输入有效                              并且速度是存在值的
+     if (inputDirection.sqrMagnitude > 0 || player.lateralVelocity.sqrMagnitude >0)
+     {
+         //则切换状态到walk状态 
+         player.states.Change<WalkPlayerState>();
+     }
+     
     }
 
     /// <summary>

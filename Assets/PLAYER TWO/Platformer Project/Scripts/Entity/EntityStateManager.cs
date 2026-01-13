@@ -12,7 +12,7 @@ public abstract class EntityStateManager : MonoBehaviour
      /// <summary>
      /// 状态管理相关事件集合(进入状态,退出状态,状态切换)
      /// </summary>
-  //   public EntityStateManagerEvents events;
+     public EntityStateManagerEvents events;
 }
 
 
@@ -38,6 +38,14 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     /// 当前激活的状态实例. 
     /// </summary>
     public EntityState<T> current { get; protected set; }
+
+    
+    /// <summary>
+    /// 上一个状态实例.
+    /// </summary>
+    public EntityState<T> last { get; protected set; }
+
+
 
     /// <summary>
     /// 该状态管理器关联的实体实例
@@ -88,7 +96,7 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
         }
         
     }
-
+ 
 
     /// <summary>
     /// 每帧调用,用于更新当前的状态逻辑.
@@ -104,5 +112,47 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
         
         
     }
-    
+
+/// <summary>
+/// 根据状态类型泛型参数切换状态.
+/// </summary>
+/// <typeparam name="TState">目标状态类型,必须继承自 EntityState<T>.</typeparam>
+    public virtual void Change<TState>() where TState : EntityState<T>
+    {
+        var type = typeof(TState);
+
+        if (m_states.ContainsKey(type))
+        {
+            Change(m_states[type]);
+        }
+        
+    }
+/// <summary>
+/// 根据状态实例切换当前状态,
+/// 执行状态退出与进入回调,并触发相关事件
+/// </summary>
+/// <param name="to">目标状态实例</param>
+    public virtual void Change(EntityState<T> to)
+    {
+        // 确保目标状态不为空且游戏未暂停(Time.timeScale >0)
+        if (to != null && Time.timeScale>0)
+        {
+            //如果有当前状态,调用退出逻辑并触发退出事件
+            if (current !=null)
+            {
+                current.Exit(entity);
+                events.onExit.Invoke(current.GetType());
+                last = current;
+            }
+            
+            //切换到目标状态,调用 进入逻辑并触发进入事件和 状态切换事件
+            current = to;
+            current.Enter(entity);
+            events.onExit.Invoke(current.GetType());
+            events.onChange?.Invoke();
+
+        }
+    }
+
+
 }

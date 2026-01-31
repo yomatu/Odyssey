@@ -45,7 +45,8 @@ public class WalkPlayerState : PlayerState
                 //加速函数
                 player.Accelerate(inputDirection);
                 
-                //player.FaceDirectionSmooth(player.lateralVelocity);
+                //朝向变化速度方向走
+                player.FaceDirectionSmooth(player.lateralVelocity);
             }
 
 

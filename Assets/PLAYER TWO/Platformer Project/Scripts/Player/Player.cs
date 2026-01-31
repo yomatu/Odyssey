@@ -87,7 +87,13 @@ public class Player : Entity<Player>
           // }
           
           
-          
       }
-      
+
+      /// <summary>
+      /// 平滑朝向某个方向旋转(陆地旋转速度)
+      /// </summary>
+      public virtual void FaceDirectionSmooth(Vector3 direction) =>
+          FaceDirection(direction, stats.current.rotationSpeed);
+
+
 }

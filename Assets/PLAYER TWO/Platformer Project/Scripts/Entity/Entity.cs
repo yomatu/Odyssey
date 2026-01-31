@@ -101,6 +101,32 @@ public class Entity<T> : EntityBase where T:Entity<T>
             }
       }
       
+      //让角色按一定旋转速度朝向某个方向(平滑转向)
+      public virtual void FaceDirection(Vector3 direction, float degreesPerSecond)
+      {
+            //必须是有效的方向
+            if (direction != Vector3.zero)
+            {
+                  //当前旋转
+                  if (direction !=Vector3.zero )
+                  {
+                        //当前旋转
+                        var rotation = transform.rotation;
+                        
+                        //本帧允许的最大旋转角度(受 Time.deltaTime 影响)
+                        var rotationDelta = degreesPerSecond * Time.deltaTime;
+                        
+                        //目标旋转
+                        var target = Quaternion.LookRotation(direction, Vector3.up);
+
+                        //按最大旋转速度逐渐逼近目标旋转
+                        transform.rotation = Quaternion.RotateTowards(rotation, target, rotationDelta);
+                  }
+            }
+      }
+      
+      
+      
       //处理角色控制器的移动
       protected virtual void HandleController()
       {

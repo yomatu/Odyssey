@@ -120,7 +120,7 @@ public class Entity<T> : EntityBase where T:Entity<T>
                         var target = Quaternion.LookRotation(direction, Vector3.up);
 
                         //按最大旋转速度逐渐逼近目标旋转
-                        transform.rotation = Quaternion.RotateTowards(rotation, target, rotationDelta);
+                        transform.rotation = Quaternion.RotateTowards(rotation, target, rotationDelta );
                   }
             }
       }

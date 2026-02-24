@@ -12,9 +12,14 @@ public class PlayerInputManager :MonoBehaviour
 
     //输入动作缓存
     protected InputAction m_movement;
+    protected InputAction m_look;
+
     
     //主摄像机引用, 用于计算相对移动方向
     protected Camera m_camera;
+    
+    //常量:鼠标设备名称
+    protected const string k_mouseDeviceName = "Mouse";
 
     //初始化调用 唤醒方法    
     protected virtual void Awake() => CacheActions();
@@ -38,8 +43,43 @@ public class PlayerInputManager :MonoBehaviour
     {
         //拿到动作的名字
         m_movement = actions["Movement"];
+        m_look = actions["Look"];
     }
 
+    /// <summary>
+    /// 获取观察方向输入
+    /// </summary>
+    /// <returns></returns>
+    public virtual Vector3 GetLookDirection()
+    {
+        var value = m_look.ReadValue<Vector2>();
+
+        if (IsLookingWithMouse())
+        {
+            return new Vector3(value.x, 0, value.y);
+        }
+
+        return GetAxisWithCrossDeadZone(value);
+    }
+
+    
+    /// <summary>
+    /// 判断是否通过鼠标进行观察输入
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool IsLookingWithMouse()
+    {
+        if (m_look.activeControl == null)
+        {
+            return false;
+        }
+
+        return m_look.activeControl.device.name.Equals(k_mouseDeviceName);
+    }
+    
+    
+    
+    
     /// <summary>
     /// 获取移动方向输入(带十字型死区判定)
     /// 如果在锁定时间内,则返回Vector3.zero 

@@ -133063,7 +133063,28 @@ PrefabInstance:
       propertyPath: m_Priority
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6828810762786445089, guid: 564bdb7014e760c43afd895061f62b70,
+        type: 3}
+      propertyPath: Priority.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828810762786445089, guid: 564bdb7014e760c43afd895061f62b70,
+        type: 3}
+      propertyPath: Priority.m_Value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828810762786445089, guid: 564bdb7014e760c43afd895061f62b70,
+        type: 3}
+      propertyPath: m_LegacyPriority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828810762786445089, guid: 564bdb7014e760c43afd895061f62b70,
+        type: 3}
+      propertyPath: m_StreamingVersion
+      value: 20230301
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4816756411855993584, guid: 564bdb7014e760c43afd895061f62b70, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

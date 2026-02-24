@@ -4,7 +4,11 @@ using UnityEngine;
 
 public abstract class EntityBase : MonoBehaviour
 {
-    
+      public Vector3 unsizedPosition => transform.position;
+
+      //是否在地面上
+      public bool isGrounded { get; protected set; } = true;
+
 }
 //泛型版本实体类,T继承自Entity<T>
 public class Entity<T> : EntityBase where T:Entity<T>

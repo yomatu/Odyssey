@@ -2,6 +2,13 @@
     using System.Collections.Generic;
     using UnityEngine;
     
+    /// <summary>
+    /// 测试.更新项目进度失败是为什么
+    /// 好像是GitHub的登录token过期导致的无法获取仓库内容
+    /// 现在好像又可以重新推送了是为什么??
+    /// </summary>
+    
+    
     //要求当前对象必须挂载 Player 组件
     [RequireComponent(typeof(Player))]
     // 在Unity 的 "Add Component" 菜单里显示该脚本的路径
@@ -120,6 +127,7 @@
 
             //设置 Animator 参数
             //可以让动画过渡更加丝滑
+            
             animator.SetInteger(m_stateHash,m_player.states.index);
             animator.SetInteger(m_lastStateHash,m_player.states.lastIndex);
             animator.SetFloat(m_lastStateHash,lateralSpeed);

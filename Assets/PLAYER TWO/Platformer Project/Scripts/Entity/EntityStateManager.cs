@@ -45,6 +45,16 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     /// </summary>
     public EntityState<T> last { get; protected set; }
 
+    /// <summary>
+    /// 当前状态在状态列表状态中的索引位置.
+    /// </summary>
+    public int index => m_list.IndexOf(current);
+
+    /// <summary>
+    /// 上一个状态在状态列表中的索引位置.
+    /// </summary>
+    public int lastIndex => m_list.IndexOf(last);
+    
 
 
     /// <summary>

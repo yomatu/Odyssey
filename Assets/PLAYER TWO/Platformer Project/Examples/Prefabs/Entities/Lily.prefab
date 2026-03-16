@@ -2158,6 +2158,7 @@ GameObject:
   - component: {fileID: 9140114700449367186}
   - component: {fileID: 7120653938169883913}
   - component: {fileID: 5420656151754413419}
+  - component: {fileID: 6996650474748674562}
   m_Layer: 0
   m_Name: Lily
   m_TagString: Untagged
@@ -2250,6 +2251,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8753bccaa7a44d84f3bc982b0b245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6996650474748674562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f26bc32f2440e8bd8116c313e2c749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateName: State
+  lastStateName: Last State
+  lateralSpeedName: Lateral Speed
+  verticalSpeedName: Vertical Speed
+  lateralAnimationSpeedName: Lateral Animation Speed
+  healthName: Health
+  jumpCounterName: Jump Counter
+  isGroundedName: Is Grounded
+  isHoldingName: Is Holding
+  onStateChangedName: On State Changed
+  minLateralAnimationSpeed: 0.5
+  forcedTransitions:
+  - fromStateId: 15
+    animationLayer: 0
+    toAnimationState: Idle
+  animator: {fileID: 301645532738941841}
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0

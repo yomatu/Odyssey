@@ -367,7 +367,7 @@ protected virtual float ClampAngle(float angle, float min, float max)
     {
         HandleOrbit(); // 输入环绕
         HandleVelocityOrbit(); //速度驱动环绕
-        HandleOffset(); //高度跟随
+            HandleOffset(); //高度跟随
         
         MoveTarget();   //更新相机目标
     }

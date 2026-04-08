@@ -8,6 +8,12 @@ public abstract class EntityBase : MonoBehaviour
 
       //是否在地面上
       public bool isGrounded { get; protected set; } = true;
+      
+      //判断实体是否在斜坡上
+      public virtual bool OnSlopingGround()
+      {
+            return false;
+      }
 
 }
 //泛型版本实体类,T继承自Entity<T>
@@ -128,7 +134,22 @@ public class Entity<T> : EntityBase where T:Entity<T>
                   }
             }
       }
-      
+
+     
+      //平滑减速,速度逐渐趋近于0 (水平速度减速)
+
+      public virtual void Decelerate(float deceleration)
+      {
+            //计算本帧的减速度(decelerationMultiplier 可用于调节全局减速效果)
+
+            var delta = deceleration * decelerationMultiplier * Time.deltaTime;
+            
+            //将 lateralVelocity (水平速度向量) 逐渐插值到 Vector3.zero (完全停止)
+            //第三个参数是本帧允许的最大速度变化量
+
+            lateralVelocity = Vector3.MoveTowards(lateralVelocity, Vector3.zero, delta);
+
+      }
       
       
       //处理角色控制器的移动

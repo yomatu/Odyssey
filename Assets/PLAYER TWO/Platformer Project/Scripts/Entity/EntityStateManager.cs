@@ -56,7 +56,7 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     public int lastIndex => m_list.IndexOf(last);
     
 
-
+  
     /// <summary>
     /// 该状态管理器关联的实体实例
     /// </summary>

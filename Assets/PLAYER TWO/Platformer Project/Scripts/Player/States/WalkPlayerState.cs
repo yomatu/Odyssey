@@ -48,7 +48,24 @@ public class WalkPlayerState : PlayerState
                 //朝向变化速度方向走
                 player.FaceDirectionSmooth(player.lateralVelocity);
             }
-
+            else
+            {
+                //低于刹车阈值 -> 进入刹车状态`
+                player.states.Change<BrakePlayerState>();
+            }
+        }
+        else
+        {
+            //没有输入 ->使用摩擦力减速
+            player.Friction();
+            
+            //当水平速度为零 -> 切换到闲置状态
+            if (player.lateralVelocity.sqrMagnitude <= 0)
+            {
+                player.states.Change<IdlePlayerState>();
+                
+                
+            }
 
         }
   

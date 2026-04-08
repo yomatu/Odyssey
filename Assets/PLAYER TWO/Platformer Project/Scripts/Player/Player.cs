@@ -88,7 +88,32 @@ public class Player : Entity<Player>
           
           
       }
+      
+      /// <summary>
+      /// 平滑减速(使用decleration参数)
+      /// </summary>
+      /// <param name="deceleration"></param>
 
+      public virtual void Decelerate() => Decelerate(stats.current.decleration);
+
+
+      /// <summary>
+      /// 平滑减速(使用摩擦力参数)
+      /// </summary>
+      public virtual void Friction()
+      {
+          if (OnSlopingGround())
+          {
+              Decelerate(stats.current.slideForce);//在斜坡上使用斜坡摩擦
+          }
+          else
+          {
+              Decelerate(stats.current.friction); //普通摩擦
+          }
+          
+      }
+      
+      
       /// <summary>
       /// 平滑朝向某个方向旋转(陆地旋转速度)
       /// </summary>

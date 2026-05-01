@@ -187,7 +187,7 @@ public class Entity<T> : EntityBase where T:Entity<T>
 
       }
       
-      
+      //加了移动控制器
       //处理角色控制器的移动
       protected virtual void HandleController()
       {

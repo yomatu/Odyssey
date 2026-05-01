@@ -1,6 +1,7 @@
 
 
 using System.Numerics;
+using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 
@@ -121,4 +122,27 @@ public class Player : Entity<Player>
           FaceDirection(direction, stats.current.rotationSpeed);
 
 
+      public virtual void Gravity()
+      {
+
+          isGrounded = false;
+          
+          if (!isGrounded && verticalVelocity.y > -stats.current.gravityTopSpeed)
+          {
+              var speed = verticalVelocity.y;
+              //上升时使用普通重力,下落时用更强的下落重力
+              var force = verticalVelocity.y > 0 ? stats.current.gravity : stats.current.fallGravity;
+
+              speed -= force * gravityMultiplier * Time.deltaTime;
+
+              // 限制最大下落速度
+              speed = Mathf.Max(speed, -stats.current.gravityTopSpeed);
+
+              verticalVelocity = new Vector3(0, speed, 0);
+
+          }
+      }
+      
+      
+      
 }

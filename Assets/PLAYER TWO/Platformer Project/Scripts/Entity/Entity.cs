@@ -8,6 +8,18 @@ public abstract class EntityBase : MonoBehaviour
 
       //是否在地面上
       public bool isGrounded { get; protected set; } = true;
+
+      //角色控制器组件
+      public CharacterController controller { get; protected set; }
+
+
+      //初始碰撞器高度
+      public float originalHeight
+      {
+            get;
+            protected set;
+      }
+      
       
       //判断实体是否在斜坡上
       public virtual bool OnSlopingGround()
@@ -58,7 +70,31 @@ public class Entity<T> : EntityBase where T:Entity<T>
       
       protected virtual void Awake()
       {
+            InitializeController(); 
             InitializeStateManager();
+
+      }
+      
+      //初始化角色控制器组件(CharacterController)
+      //负责角色的基本移动,碰撞等物理交互
+      protected virtual void InitializeController()
+      {
+            //获取当前物体上的 CharacterController 组件
+            controller = GetComponent<CharacterController>();
+            
+            //如果没有,就动态添加一个 CharacterController
+
+            if (!controller)
+            {
+                  controller = gameObject.AddComponent<CharacterController>();
+            }
+            
+            //skinWidth 表示碰撞器表面到实际碰撞检测边界的距离(防止卡住用的小偏移)
+            controller.skinWidth = 0.005f;
+            //minMoveDistance 为最小移动距离,(设为0表示即使移动非常小也会被检测到)
+            controller.minMoveDistance = 0;
+            //记录角色控制器的初始高度(用于后续复位或者高度调整)
+            originalHeight = controller.height;
 
       }
 
@@ -155,11 +191,11 @@ public class Entity<T> : EntityBase where T:Entity<T>
       //处理角色控制器的移动
       protected virtual void HandleController()
       {
-            // if (controller.enabled)
-            // {
-            //       controller.Move(velocity * Time.deltaTime);
-            //       return;
-            // }
+            if (controller.enabled)
+            {
+                  controller.Move(velocity * Time.deltaTime);
+                  return;
+            }
 
             transform.position += velocity * Time.deltaTime;
 

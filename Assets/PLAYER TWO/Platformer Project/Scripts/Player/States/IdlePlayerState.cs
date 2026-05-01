@@ -23,7 +23,7 @@ public class IdlePlayerState : PlayerState
     /// <param name="player"></param>
     protected override void OnExit(Player player)
     {
-        
+        Debug.Log("Exited IdlePlayerState");
     }
 
     /// <summary>
@@ -32,6 +32,9 @@ public class IdlePlayerState : PlayerState
     /// <param name="player"></param>
     protected override void OnStep(Player player)
     {
+        //应用重力
+        player.Gravity();
+        
         //这里打印了玩家是否正确的进入了该状态
         // Debug.Log("IdlePlayerState::OnStep");
      

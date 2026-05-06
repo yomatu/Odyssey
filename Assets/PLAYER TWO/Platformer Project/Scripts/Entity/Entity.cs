@@ -20,6 +20,8 @@ public abstract class EntityBase : MonoBehaviour
             protected set;
       }
       
+      //上一次处于地面时间
+      public float lastGroundTime { get; protected set; }
       
       //判断实体是否在斜坡上
       public virtual bool OnSlopingGround()

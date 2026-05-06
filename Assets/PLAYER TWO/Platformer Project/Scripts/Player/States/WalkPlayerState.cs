@@ -34,6 +34,9 @@ public class WalkPlayerState : PlayerState
         //重力处理
         player.Gravity();
         
+        //跳跃处理
+        player.Jump();
+
         
         
         //获取玩家输入方向(相机方向)

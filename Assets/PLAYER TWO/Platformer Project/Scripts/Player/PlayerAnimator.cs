@@ -133,8 +133,11 @@
             animator.SetFloat(m_lastStateHash,lateralSpeed);
             animator.SetFloat(m_verticalSpeedHash,verticalSpeed);
             animator.SetFloat(m_lateralAnimationSpeedHash,lateralAnimationSpeed);
-            animator.SetBool(m_isGroundedHash,m_player.isGrounded);
+           
+            animator.SetInteger(m_jumpCounterHash, m_player.jumpCounter);
             
+            animator.SetBool(m_isGroundedHash,m_player.isGrounded);
+                 
         }
         
         

@@ -794,7 +794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8894101937282624714
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,7 +1329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1679367523122203757
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,7 +2239,8 @@ MonoBehaviour:
   states:
   - IdlePlayerState
   - WalkPlayerState
-  - BreakPlayerState
+  - BrakePlayerState
+  - FallPlayerState
 --- !u!114 &5420656151754413419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,6 +2253,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8753bccaa7a44d84f3bc982b0b245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerEvents:
+    OnJump:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &6996650474748674562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3338,7 +3343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3749565669628705137
 Transform:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerInputManager :MonoBehaviour
     //输入动作缓存
     protected InputAction m_movement;
     protected InputAction m_look;
+    protected InputAction m_jump;
 
     
     //主摄像机引用, 用于计算相对移动方向
@@ -20,6 +21,14 @@ public class PlayerInputManager :MonoBehaviour
     
     //常量:鼠标设备名称
     protected const string k_mouseDeviceName = "Mouse";
+    
+    //最近一次按下跳跃的时间.用于跳跃缓冲
+    protected float? m_lastJumpTime;
+    
+    //常量,跳跃缓冲时常(单位:秒)
+    protected const float k_jumpBuffer = 0.15f;
+    
+    
 
     //初始化调用 唤醒方法    
     protected virtual void Awake() => CacheActions();
@@ -30,6 +39,16 @@ public class PlayerInputManager :MonoBehaviour
         m_camera = Camera.main;
         //激活actions
         actions.Enable();
+    }
+
+    protected void Update()
+    {
+        //记录跳跃按下时间,用于实现跳跃缓冲
+        if (m_jump.WasReleasedThisFrame())
+        {
+            m_lastJumpTime = Time.time;
+        }
+        
     }
 
 
@@ -44,6 +63,7 @@ public class PlayerInputManager :MonoBehaviour
         //拿到动作的名字
         m_movement = actions["Movement"];
         m_look = actions["Look"];
+        m_jump = actions["Jump"];
     }
 
     /// <summary>
@@ -161,6 +181,20 @@ public class PlayerInputManager :MonoBehaviour
         return direction;
 
     }
-                
-                
+
+
+    public virtual bool GetJumpDown()
+    {
+        if (m_lastJumpTime != null&&
+            Time.time - m_lastJumpTime < k_jumpBuffer)
+        {
+            m_lastJumpTime = null;
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual bool GetJumpUp() => m_jump.WasReleasedThisFrame();
+    
 }

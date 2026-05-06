@@ -28,6 +28,10 @@
         /// <param name="player"></param>
         protected override void OnStep(Player player)
         {
+            //检查并执行跳跃(如果玩家按下跳跃键)
+            player.Jump();
+
+            
             //执行减速逻辑(逐渐降低水平速度,直到停下)
             player.Decelerate();
             

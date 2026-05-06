@@ -34,6 +34,11 @@ public class IdlePlayerState : PlayerState
     {
         //应用重力
         player.Gravity();
+
+        //检查并执行跳跃(如果玩家按下跳跃键)
+        player.Jump();
+
+        
         
         //这里打印了玩家是否正确的进入了该状态
         // Debug.Log("IdlePlayerState::OnStep");

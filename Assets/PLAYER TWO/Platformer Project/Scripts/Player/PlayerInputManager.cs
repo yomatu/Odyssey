@@ -2,8 +2,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputManager :MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
+    /// <summary>
+    ///     //测试推送 测试推送,为什么又失败了?
+    /// 现在用这个方法可以更新远程仓库的推送链接.目前该方法可以成功推送,下次失败的时候就试试这个
+    ///
+    /// 检查当前远程仓库配置
+    /// git remote -v
+    /// 
+    /// 更新远程仓库URL（推荐）
+    /// # 将origin设置为可用的链接
+    /// git remote set-url origin https://github.com/yomatu/Odyssey.git
+    ///
+    /// 重新推送
+    ///
+    /// git push origin main
+    /// 
+    /// </summary>
+
     //输入动作资源(在 Input System 中配置的  InputActionAsset)
     public InputActionAsset actions;
 
@@ -15,27 +32,25 @@ public class PlayerInputManager :MonoBehaviour
     protected InputAction m_look;
     protected InputAction m_jump;
 
-    
+
     //主摄像机引用, 用于计算相对移动方向
     protected Camera m_camera;
-    
+
     //常量:鼠标设备名称
     protected const string k_mouseDeviceName = "Mouse";
-    
+
     //最近一次按下跳跃的时间.用于跳跃缓冲
     protected float? m_lastJumpTime;
-    
+
     //常量,跳跃缓冲时常(单位:秒)
     protected const float k_jumpBuffer = 0.15f;
-    
-    
+
 
     //初始化调用 唤醒方法    
     protected virtual void Awake() => CacheActions();
 
     protected virtual void Start()
     {
-
         m_camera = Camera.main;
         //激活actions
         actions.Enable();
@@ -48,14 +63,13 @@ public class PlayerInputManager :MonoBehaviour
         {
             m_lastJumpTime = Time.time;
         }
-        
     }
 
 
     protected virtual void OnEnable() => actions?.Enable();
 
 
-    protected virtual void OnDisable()=> actions?.Disable();
+    protected virtual void OnDisable() => actions?.Disable();
 
 
     protected virtual void CacheActions()
@@ -82,7 +96,7 @@ public class PlayerInputManager :MonoBehaviour
         return GetAxisWithCrossDeadZone(value);
     }
 
-    
+
     /// <summary>
     /// 判断是否通过鼠标进行观察输入
     /// </summary>
@@ -96,10 +110,8 @@ public class PlayerInputManager :MonoBehaviour
 
         return m_look.activeControl.device.name.Equals(k_mouseDeviceName);
     }
-    
-    
-    
-    
+
+
     /// <summary>
     /// 获取移动方向输入(带十字型死区判定)
     /// 如果在锁定时间内,则返回Vector3.zero 
@@ -116,7 +128,6 @@ public class PlayerInputManager :MonoBehaviour
         var value = m_movement.ReadValue<Vector2>();
 
         return GetAxisWithCrossDeadZone(value);
-
     }
 
     /// <summary>
@@ -124,7 +135,6 @@ public class PlayerInputManager :MonoBehaviour
     /// </summary>
     /// <param name="axis">输入轴</param>
     /// <returns></returns>
-
     public virtual Vector3 GetAxisWithCrossDeadZone(Vector2 axis)
     {
         var deadzone = InputSystem.settings.defaultDeadzoneMin;
@@ -142,10 +152,9 @@ public class PlayerInputManager :MonoBehaviour
     /// <param name="value"></param>
     /// <param name="deadzone"></param>
     /// <returns></returns>
-
     protected float RemapToDeadzone(float value, float deadzone) =>
-        (value - (value > 0 ? -deadzone : deadzone)) / (1 - deadzone);  
-                //取了绝对值
+        (value - (value > 0 ? -deadzone : deadzone)) / (1 - deadzone);
+    //取了绝对值
 
     //
 
@@ -160,32 +169,30 @@ public class PlayerInputManager :MonoBehaviour
         var direction = GetMovementDirection();
 
         //2. 如果有输入(不是0向量)
-        if (direction.sqrMagnitude>0)
+        if (direction.sqrMagnitude > 0)
         {
             //3.构建一个旋转,根据摄像机的Y轴速度(水平朝向)
             //Quaternion.AngleAxis(angle, axis)表示绕某个轴旋转一个角度
             var rotation = Quaternion.AngleAxis(m_camera.transform.eulerAngles.y, Vector3.up);
-            
-            
+
+
             //4.把原始输入方向旋转到摄像机从朝向下
 
             direction = rotation * direction;
-            
+
             //5.归一化,保持方向向量的长度为 1 (只保留方向)
 
             direction = direction.normalized;
-
         }
 
         // 6.返回最终的世界空间移动方向
         return direction;
-
     }
 
 
     public virtual bool GetJumpDown()
     {
-        if (m_lastJumpTime != null&&
+        if (m_lastJumpTime != null &&
             Time.time - m_lastJumpTime < k_jumpBuffer)
         {
             m_lastJumpTime = null;
@@ -196,5 +203,4 @@ public class PlayerInputManager :MonoBehaviour
     }
 
     public virtual bool GetJumpUp() => m_jump.WasReleasedThisFrame();
-    
 }

@@ -2253,6 +2253,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8753bccaa7a44d84f3bc982b0b245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityEvents:
+    OnGroundEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnGroundExit:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRailsEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    onRailsExit:
+      m_PersistentCalls:
+        m_Calls: []
   playerEvents:
     OnJump:
       m_PersistentCalls:
@@ -2986,7 +2999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5062800599606034852
 Transform:
   m_ObjectHideFlags: 0

@@ -28,9 +28,17 @@
         /// <param name="player"></param>
         protected override void OnStep(Player player)
         {
+            //帧驱动.好处特别灵活
+            //坏处不好调试
+            //吸附到地面.避免悬空抖动
+            player.SnapToGround();
+            
             //检查并执行跳跃(如果玩家按下跳跃键)
             player.Jump();
 
+            //检查是否进入下落状态
+            player.Fall();
+            
             
             //执行减速逻辑(逐渐降低水平速度,直到停下)
             player.Decelerate();

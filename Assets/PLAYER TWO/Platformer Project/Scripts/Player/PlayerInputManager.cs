@@ -56,7 +56,9 @@ public class PlayerInputManager : MonoBehaviour
         actions.Enable();
     }
 
-    protected void Update()
+    //这里少了个 virtual 虚方法声明,会不会影响跳跃判断呢
+    //没有关联.可能是isground的判定出了问题?
+    protected virtual void Update()
     {
         //记录跳跃按下时间,用于实现跳跃缓冲
         if (m_jump.WasReleasedThisFrame())

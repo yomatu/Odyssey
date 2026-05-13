@@ -5,6 +5,13 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 
+
+/// <summary>
+/// 第二课存在一些问题,为什么在空中角色移动会悬空,为什么无法执行顺利的移动跳跃切换
+/// 第二课跟了一遍没问题, 会不会是第一课的bug?0
+///
+/// 
+/// </summary>
 public class Player : Entity<Player>
 {                     //继承自通用的Entity<Player>基类 
 
@@ -43,6 +50,10 @@ public class Player : Entity<Player>
          base.Awake();
          InitializeInputs();
          InitializeStats();
+         
+         //监听落地事件,重置跳跃/空中技能次数
+         entityEvents.OnGroundEnter.AddListener(()=> {ResetJumps();});
+         
     }
     
      
@@ -121,9 +132,20 @@ public class Player : Entity<Player>
           }
           
       }
-      
-      
+              
       /// <summary>
+      /// 根据相机方向来平滑移动玩家
+      /// </summary>
+      public virtual void AccelerateToInputDirection()
+      {
+            //输入相对于相机的方向
+          var inputDirection = inputs.GetMovementCameraDirection();
+          
+          Accelerate(inputDirection);
+      }
+      
+      
+      /// <summary> 
       /// 平滑朝向某个方向旋转(陆地旋转速度)
       /// </summary>
       public virtual void FaceDirectionSmooth(Vector3 direction) =>
@@ -133,7 +155,7 @@ public class Player : Entity<Player>
       public virtual void Gravity()
       {
 
-          isGrounded = false;
+          //isGrounded = false;
           
           if (!isGrounded && verticalVelocity.y > -stats.current.gravityTopSpeed)
           {
@@ -152,6 +174,29 @@ public class Player : Entity<Player>
       }
 
       /// <summary>
+      /// 通过 snap 力量强制把玩家贴到地面上
+      /// </summary>
+      public virtual void SnapToGround() => SnapToGround(stats.current.snapForce);
+
+      /// <summary>
+      /// 重置跳跃计数(回到0,常用于落地时)
+      /// 这里的reset拼写错误但是没有影响实际逻辑判断,问题在哪里呢
+      /// </summary>
+      public virtual void ResetJumps() => jumpCounter = 0;  
+      
+      
+      /// <summary>
+      /// 如果玩家不在地面上,切换到下落状态
+      /// </summary>
+      public virtual void Fall()
+      {
+          if (!isGrounded)
+          {
+              states.Change<FallPlayerState>();
+          }
+      }
+      
+      /// <summary>
       /// 执行跳跃逻辑(包括多段跳跃,土狼跳,持物判定)
       /// </summary>
       public virtual void Jump()
@@ -164,7 +209,7 @@ public class Player : Entity<Player>
 
           var canCoyoteJump = (jumpCounter == 0) && (Time.time < lastGroundTime + stats.current.coyoteJumpThreshold);
 
-          isGrounded = true;
+         // isGrounded = true;
           
           // //是否允许在持物状态下跳跃
           //

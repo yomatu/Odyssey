@@ -8,7 +8,8 @@ using Vector3 = UnityEngine.Vector3;
 
 /// <summary>
 /// 第二课存在一些问题,为什么在空中角色移动会悬空,为什么无法执行顺利的移动跳跃切换
-/// 第二课跟了一遍没问题, 会不会是第一课的bug?0
+/// 第二课跟了一遍没问题, 会不会是第一课的bug?
+/// 不是,是entity的逻辑错误导致的问题
 ///
 /// 
 /// </summary>
@@ -29,9 +30,15 @@ public class Player : Entity<Player>
      public PlayerStatsManager stats { get; protected set; }
      
      
+     /// <summary> 玩家已跳跃的次数（用于多段跳） </summary>
      public int jumpCounter { get; protected set; }
      
+     
+     /// <summary> 玩家是否在水中 </summary>
+     public bool onWater { get; protected set; }
 
+     /// <summary> 生命值实例 </summary>
+     public Health health { get; protected set; }
    
      // 这里是对的.说明问题出现在       InitializeInputs(); 方法里面
     //    protected override void Awake()
@@ -50,7 +57,8 @@ public class Player : Entity<Player>
          base.Awake();
          InitializeInputs();
          InitializeStats();
-         
+         InitializeHealth();
+         InitializeTag();
          //监听落地事件,重置跳跃/空中技能次数
          entityEvents.OnGroundEnter.AddListener(()=> {ResetJumps();});
          
@@ -63,8 +71,13 @@ public class Player : Entity<Player>
   
      //初始化数值
       protected virtual void InitializeStats() => stats = GetComponent<PlayerStatsManager>();
-
-
+    
+      // 初始化生命
+      protected virtual void InitializeHealth() => health = GetComponent<Health>();
+      
+      // 初始化标签（标记为 Player）因为要碰撞的目标是玩家
+      protected virtual void InitializeTag() => tag = GameTags.Player;
+      
       /// <summary>
       /// 在指定方向上平滑移动玩家(加速度控制)
       /// </summary>
@@ -177,6 +190,42 @@ public class Player : Entity<Player>
       /// 通过 snap 力量强制把玩家贴到地面上
       /// </summary>
       public virtual void SnapToGround() => SnapToGround(stats.current.snapForce);
+      
+      /// <summary>
+      /// 对玩家造成伤害（带击退与受伤反应）
+      /// </summary>
+      /// <param name="amount">要扣除的生命值</param>
+      /// <param name="origin">伤害来源位置（用于计算击退方向）</param>
+      public override void ApplyDamage(int amount, Vector3 origin)
+      {
+          if (!health.isEmpty && !health.recovering) // 确保玩家未死亡且不在恢复无敌状态
+          {
+              health.Damage(amount); // 扣血
+              var damageDir = origin - transform.position; // 计算受击方向
+              damageDir.y = 0; // 忽略垂直方向
+              damageDir = damageDir.normalized;
+              FaceDirection(damageDir); // 面向攻击方向(获得力被击飞)
+
+              // 受伤时向后击退
+              lateralVelocity = -transform.forward * stats.current.hurtBackwardsForce;
+
+              if (!onWater) // 如果不在水中，则会被击飞向上并进入受伤状态
+              {
+                  verticalVelocity = Vector3.up * stats.current.hurtUpwardForce;
+                  states.Change<HurtPlayerState>();
+              }
+
+              playerEvents.OnHurt?.Invoke(); // 触发受伤事件
+
+              // 如果血量空了 -> 死亡
+              // if (health.isEmpty)
+              // {
+              //     Throw(); // 丢掉物品
+              //     playerEvents.OnDie?.Invoke(); // 触发死亡事件
+              // }
+          }
+      }
+
 
       /// <summary>
       /// 重置跳跃计数(回到0,常用于落地时)

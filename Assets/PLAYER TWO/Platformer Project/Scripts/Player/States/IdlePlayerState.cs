@@ -23,7 +23,7 @@ public class IdlePlayerState : PlayerState
     /// <param name="player"></param>
     protected override void OnExit(Player player)
     {
-        Debug.Log("Exited IdlePlayerState");
+        //Debug.Log("Exited IdlePlayerState");
     }
 
     /// <summary>

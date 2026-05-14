@@ -56,6 +56,11 @@ public class PlayerStats : EntityStats<PlayerStats>
     //最小跳跃高度(轻按跳)
     public float minJumpHeight = 10f;
 
+    
+    //==============================【受伤反应】==============================//
+    [Header("Hurt Stats")]
+    public float hurtUpwardForce = 10f;        // 受伤时向上的力
+    public float hurtBackwardsForce = 5f;      // 受伤时向后的力
 
 
 }

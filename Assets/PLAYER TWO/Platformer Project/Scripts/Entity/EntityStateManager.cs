@@ -158,7 +158,8 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
             //切换到目标状态,调用 进入逻辑并触发进入事件和 状态切换事件
             current = to;
             current.Enter(entity);
-            events.onExit.Invoke(current.GetType());
+          //events.onExit.Invoke(current.GetType());//这里应该是进入新状态,而不是退出旧状态
+            events.onEnter.Invoke(current.GetType());                
             events.onChange?.Invoke();
 
         }

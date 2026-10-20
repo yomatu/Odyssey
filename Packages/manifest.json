@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.bytedance.ide.trae": "https://github.com/Pico-Developer/TRAE-Editor-Unity.git",
     "com.unity.ai.navigation": "2.0.0",
     "com.unity.cinemachine": "3.0.1",
     "com.unity.collab-proxy": "2.3.1",

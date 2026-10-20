@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.bytedance.ide.trae": {
+      "version": "https://github.com/Pico-Developer/TRAE-Editor-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.33"
+      },
+      "hash": "ffe086cd28a5da43a5efaa043a3cb1fe4c055cf1"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.0",
       "depth": 0,

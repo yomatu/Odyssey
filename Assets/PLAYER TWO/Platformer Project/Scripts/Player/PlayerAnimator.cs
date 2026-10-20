@@ -130,7 +130,7 @@
             
             animator.SetInteger(m_stateHash,m_player.states.index);
             animator.SetInteger(m_lastStateHash,m_player.states.lastIndex);
-            animator.SetFloat(m_lastStateHash,lateralSpeed);
+            animator.SetFloat(m_lateralSpeedHash,lateralSpeed);
             animator.SetFloat(m_verticalSpeedHash,verticalSpeed);
             animator.SetFloat(m_lateralAnimationSpeedHash,lateralAnimationSpeed);
            

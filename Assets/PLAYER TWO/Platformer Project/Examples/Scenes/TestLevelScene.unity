@@ -90930,12 +90930,37 @@ PrefabInstance:
     - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
         type: 3}
       propertyPath: states.Array.size
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
         type: 3}
       propertyPath: 'states.Array.data[4]'
       value: HurtPlayerState
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
+        type: 3}
+      propertyPath: 'states.Array.data[5]'
+      value: IdlePlayerState
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
+        type: 3}
+      propertyPath: 'states.Array.data[6]'
+      value: IdlePlayerState
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
+        type: 3}
+      propertyPath: 'states.Array.data[7]'
+      value: IdlePlayerState
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
+        type: 3}
+      propertyPath: 'states.Array.data[8]'
+      value: IdlePlayerState
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
+        type: 3}
+      propertyPath: 'states.Array.data[9]'
+      value: IdlePlayerState
       objectReference: {fileID: 0}
     - target: {fileID: 7955624928045367239, guid: eb0f77ac3ce65a04db54ff55e59b0815,
         type: 3}

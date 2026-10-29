@@ -80,8 +80,13 @@ public class WalkPlayerState : PlayerState
             }
 
         }
-  
-        
+
+        //玩家按下下蹲爬行键
+        //切换状态到crouch状态
+        if(player.inputs.GetCrouchAndCraw())
+        {
+            player.states.Change<CrouchPlayerState>();
+        }
         
     }
 

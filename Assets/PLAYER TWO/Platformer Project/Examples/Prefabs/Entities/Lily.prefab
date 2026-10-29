@@ -2159,6 +2159,7 @@ GameObject:
   - component: {fileID: 7120653938169883913}
   - component: {fileID: 5420656151754413419}
   - component: {fileID: 6996650474748674562}
+  - component: {fileID: 2521233722876933220}
   m_Layer: 0
   m_Name: Lily
   m_TagString: Untagged
@@ -2241,6 +2242,7 @@ MonoBehaviour:
   - WalkPlayerState
   - BrakePlayerState
   - FallPlayerState
+  - HurtPlayerState
 --- !u!114 &5420656151754413419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2268,6 +2270,57 @@ MonoBehaviour:
         m_Calls: []
   playerEvents:
     OnJump:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHurt:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDie:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSpin:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPickUp:
+      m_PersistentCalls:
+        m_Calls: []
+    OnThrow:
+      m_PersistentCalls:
+        m_Calls: []
+    OnStompStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnStompFalling:
+      m_PersistentCalls:
+        m_Calls: []
+    OnStompLanding:
+      m_PersistentCalls:
+        m_Calls: []
+    OnStompEnding:
+      m_PersistentCalls:
+        m_Calls: []
+    OnLedgeGrabbed:
+      m_PersistentCalls:
+        m_Calls: []
+    OnLedgeClimbing:
+      m_PersistentCalls:
+        m_Calls: []
+    OnAirDive:
+      m_PersistentCalls:
+        m_Calls: []
+    OnBackflip:
+      m_PersistentCalls:
+        m_Calls: []
+    OnGlidingStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnGlidingStop:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDashStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDashEnded:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &6996650474748674562
@@ -2298,6 +2351,27 @@ MonoBehaviour:
     animationLayer: 0
     toAnimationState: Idle
   animator: {fileID: 301645532738941841}
+--- !u!114 &2521233722876933220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed43ed258cd4f04b6772eda99e27310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initial: 3
+  max: 3
+  coolDown: 1
+  onChange:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0

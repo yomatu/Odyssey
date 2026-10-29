@@ -27,19 +27,23 @@ public class Player : Entity<Player>
      /// <summary>
      /// 玩家数值管理实例
      /// </summary>
-     public PlayerStatsManager stats { get; protected set; }
+    public PlayerStatsManager stats { get; protected set; }
      
      
      /// <summary> 玩家已跳跃的次数（用于多段跳） </summary>
-     public int jumpCounter { get; protected set; }
+    public int jumpCounter { get; protected set; }
      
      
      /// <summary> 玩家是否在水中 </summary>
-     public bool onWater { get; protected set; }
+    public bool onWater { get; protected set; }
 
      /// <summary> 生命值实例 </summary>
-     public Health health { get; protected set; }
+    public Health health { get; protected set; }
    
+     /// <summary> 玩家是否正在持有物品</summary>
+    public bool holding { get; protected set; }
+
+
      // 这里是对的.说明问题出现在       InitializeInputs(); 方法里面
     //    protected override void Awake()
     // {
@@ -225,6 +229,14 @@ public class Player : Entity<Player>
               // }
           }
       }
+
+        /// <summary>
+        /// 判断玩家是否可以起立
+        /// 通过spherecast检测头顶是否有障碍物
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool canStandUp() => !SphereCast(Vector3.up,originalHeight);
+
 
 
       /// <summary>

@@ -90,6 +90,8 @@ public abstract class EntityBase : MonoBehaviour
     // 判断一个点是否在实体脚步位置下方（用于踩踏检测）
     public virtual bool IsPointUnderStep(Vector3 point) => stepPosition.y > point.y;
     
+
+
     // 球形检测（无返回检测信息，只返回是否检测到碰撞）
     public virtual bool SphereCast(Vector3 direction, float distance, int layer = Physics.DefaultRaycastLayers,
         QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore)

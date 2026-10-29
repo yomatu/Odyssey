@@ -31,6 +31,7 @@ public class PlayerInputManager : MonoBehaviour
     protected InputAction m_movement;
     protected InputAction m_look;
     protected InputAction m_jump;
+    protected InputAction m_crouch;
 
 
     //主摄像机引用, 用于计算相对移动方向
@@ -80,7 +81,8 @@ public class PlayerInputManager : MonoBehaviour
         m_movement = actions["Movement"];
         m_look = actions["Look"];
         m_jump = actions["Jump"];
-    }
+        m_crouch = actions["Crouch"];
+    } 
 
     /// <summary>
     /// 获取观察方向输入
@@ -205,4 +207,7 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     public virtual bool GetJumpUp() => m_jump.WasReleasedThisFrame();
+
+    public virtual bool GetCrouchAndCraw() => m_crouch.IsPressed();
+
 }

@@ -63,7 +63,15 @@ public class IdlePlayerState : PlayerState
          //则切换状态到walk状态 
          player.states.Change<WalkPlayerState>();
      }
-     
+     //如果玩家按下蹲伏爬行键
+     //则切换状态到crouch状态 
+     else if (player.inputs.GetCrouchAndCraw())
+     {
+         //则切换状态到crouch状态 
+         player.states.Change<CrouchPlayerState>();
+     }
+
+
     }
 
     /// <summary>

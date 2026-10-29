@@ -1,0 +1,93 @@
+{
+	// 项目级 C# 代码片段：输入 prefix 后按 Tab 生成骨架
+	// ${TM_FILENAME_BASE} 会自动展开为当前文件名（不含 .cs），实现类名与文件名一致
+
+	"Unity MonoBehaviour 模板": {
+		"scope": "csharp",
+		"prefix": "mono",
+		"body": [
+			"using UnityEngine;",
+			"",
+			"/// <summary>",
+			"/// ${1:描述这个类的职责}",
+			"/// </summary>",
+			"public class ${2:${TM_FILENAME_BASE}} : MonoBehaviour",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "MonoBehaviour 基础模板，类名自动匹配文件名"
+	},
+
+	"Unity PlayerState 模板": {
+		"scope": "csharp",
+		"prefix": "pstate",
+		"body": [
+			"using UnityEngine;",
+			"",
+			"/// <summary>",
+			"/// ${1:描述这个状态的行为}",
+			"/// </summary>",
+			"public class ${2:${TM_FILENAME_BASE}} : PlayerState",
+			"{",
+			"\t/// <summary>",
+			"\t/// 进入状态时调用（可用于播放动画、音效）",
+			"\t/// </summary>",
+			"\t/// <param name=\"player\"></param>",
+			"\tprotected override void OnEnter(Player player)",
+			"\t{",
+			"\t\t$3",
+			"\t}",
+			"",
+			"\t/// <summary>",
+			"\t/// 离开状态时调用（可用于清理状态效果）",
+			"\t/// </summary>",
+			"\t/// <param name=\"player\"></param>",
+			"\tprotected override void OnExit(Player player)",
+			"\t{",
+			"\t\t$4",
+			"\t}",
+			"",
+			"\t/// <summary>",
+			"\t/// 每帧更新状态逻辑",
+			"\t/// </summary>",
+			"\t/// <param name=\"player\"></param>",
+			"\tprotected override void OnStep(Player player)",
+			"\t{",
+			"\t\t$5",
+			"\t}",
+			"}"
+		],
+		"description": "项目 PlayerState 状态类模板（OnEnter/OnExit/OnStep）"
+	},
+
+	"C# 普通类模板": {
+		"scope": "csharp",
+		"prefix": "class",
+		"body": [
+			"/// <summary>",
+			"/// ${1:描述这个类的职责}",
+			"/// </summary>",
+			"public class ${2:${TM_FILENAME_BASE}}",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "普通 C# 类，类名自动匹配文件名"
+	},
+
+	"Unity ScriptableObject 模板": {
+		"scope": "csharp",
+		"prefix": "so",
+		"body": [
+			"using UnityEngine;",
+			"",
+			"[CreateAssetMenu(fileName = \"${2:${TM_FILENAME_BASE}}\", menuName = \"Game Data/${1:分类}\", order = 0)]",
+			"public class ${3:${TM_FILENAME_BASE}} : ScriptableObject",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "ScriptableObject 数据资产模板（DataSO 风格）"
+	}
+}

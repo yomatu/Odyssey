@@ -122,10 +122,21 @@ public class Player : Entity<Player>
           // {
           //     lateralVelocity = Vector3.ClampMagnitude(lateralVelocity, topSpeed);
           // }
-          
-          
+
+
       }
       
+      /// <summary>
+      /// 在指定方向上平滑移动玩家(匍匐状态的参数)
+      /// </summary>
+      /// <param name="direction"></param>
+      public virtual void CrawlingAccelerate(Vector3 direction) =>
+          Accelerate(direction, stats.current.crawlingTurningSpeed, stats.current.crawlingAcceleration, stats.current.crawlingTopSpeed);
+     
+
+
+
+
       /// <summary>
       /// 平滑减速(使用decleration参数)
       /// </summary>

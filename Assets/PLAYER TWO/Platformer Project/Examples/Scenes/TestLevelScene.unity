@@ -90927,82 +90927,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: states.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: 'states.Array.data[4]'
-      value: HurtPlayerState
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: 'states.Array.data[5]'
-      value: IdlePlayerState
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: 'states.Array.data[6]'
-      value: IdlePlayerState
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: 'states.Array.data[7]'
-      value: IdlePlayerState
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: 'states.Array.data[8]'
-      value: IdlePlayerState
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120653938169883913, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: 'states.Array.data[9]'
-      value: IdlePlayerState
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955624928045367239, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6650432633027884458, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1479944705}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0f77ac3ce65a04db54ff55e59b0815, type: 3}
---- !u!1 &1479944704 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6650432633027884458, guid: eb0f77ac3ce65a04db54ff55e59b0815,
-    type: 3}
-  m_PrefabInstance: {fileID: 1479944703}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1479944705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479944704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed43ed258cd4f04b6772eda99e27310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initial: 3
-  max: 3
-  coolDown: 1
-  onChange:
-    m_PersistentCalls:
-      m_Calls: []
-  onDamage:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1479958866
 GameObject:
   m_ObjectHideFlags: 0
